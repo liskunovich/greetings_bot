@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Here!</title>
+    <style>
+        form {
+            margin: 0 auto;
+            width: 400px;
+            padding: 1em;
+            border: 1px solid #ccc;
+            border-radius: 1em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        form li + li {
+            margin-top: 1em;
+        }
+
+        label {
+            display: inline-block;
+            width: 90px;
+            text-align: right;
+        }
+
+        input,
+        textarea {
+            font: 1em sans-serif;
+
+            width: 300px;
+            box-sizing: border-box;
+
+            border: 1px solid #999;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #000;
+        }
+
+        textarea {
+            vertical-align: top;
+
+            height: 5em;
+        }
+
+        .button {
+            padding-left: 90px;
+        }
+
+        button {
+            margin: 15px auto;
+            display: block;
+        }
+
+        .errors {
+            display: block;
+            text-align: center;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+{% block content %}
+<form action="/" method="POST" onsubmit="handleSubmit(event)">
+    {{ form.csrf_token }}
+    <ul>
+        <li>
+            {{form.name.label}}
+            {{form.name}}
+        </li>
+
+        {% if form.name.errors %}
+        <ul class="errors">
+            {% for error in form.name.errors %}
+            <li style="color: red">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <li>
+            {{form.city.label}}
+            {{form.city}}
+        </li>
+
+        {% if form.city.errors %}
+        <ul class="errors">
+            {% for error in form.city.errors %}
+            <li style="color: red">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <li>
+            {{form.username.label}}
+            {{form.username}}
+        </li>
+
+        {% if form.username.errors %}
+        <ul class="errors">
+            {% for error in form.username.errors %}
+            <li style="color: red">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </ul>
+    <button type="submit">Отправить</button>
+
+
+</form>
+{% endblock %}
+</body>
+</html>
